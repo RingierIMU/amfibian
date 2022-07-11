@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  playweekqueryathenamysql:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 183
+      Role: 'arn:aws:iam::563352982623:role/AWSLambdaS3Cloudwatch'
+      Layers:
+        - 'arn:aws:lambda:eu-west-1:336392948345:layer:AWSDataWrangler-Python39:7'
