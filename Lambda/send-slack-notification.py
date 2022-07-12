@@ -11,7 +11,7 @@ def py_to_slack(text):
     try:
         # print('within...')
         json_data = json.dumps(post)
-        req = request.Request("https://hooks.slack.com/services/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",
+        req = request.Request("slackhook",
                               data=json_data.encode('ascii'),
                               headers={'Content-Type': 'application/json'}
         )
@@ -24,7 +24,7 @@ def py_to_slack(text):
 
 def get_db_changes():
     database = 'playweekdemo'
-    todays_date = "2022-07-08 00:00:00" # datetime.date.today().strftime('%Y-%m-%d 00:00:00') # no data for the 8th
+    todays_date = datetime.date.today().strftime('%Y-%m-%d 00:00:00') # no data for the 8th
     query = f"select table_name, column_name, column_datatype from dbchange_staging" # where created_at >= cast('{todays_date}' as timestamp)"
     df = wr.athena.read_sql_query(sql=query, database=database, ctas_approach=False)
     print(df)

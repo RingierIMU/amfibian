@@ -23,9 +23,8 @@ job_name = args["JOB_NAME"]
 
 try:
     _meta_verticals = {
-            "countries": "s3://playweek/tables/countries.json",
-            "people": "s3://playweek/tables/people.json",
-            "third_table" : "s3://playweek/tables/third_table.json"
+            # Example :
+            # "brk": "s3://location/...json",
         }
 
     for _vertical, _paths in _meta_verticals.items():
@@ -34,8 +33,8 @@ try:
 
         df = spark.read.option("multiline", "true").json(_paths)
 
-        _stage_bucket = "playweek"
-        _stage_prefix = "staging"
+        _stage_bucket = "destination_bucket"
+        _stage_prefix = "destination_folder"
         print(df.printSchema())
         print(df.show(5, False))
 
